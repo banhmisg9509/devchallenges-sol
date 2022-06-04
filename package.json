@@ -1,0 +1,19 @@
+{
+  "name": "frontend-mentor",
+  "version": "1.0.0",
+  "description": "Frontend Mentor solutions",
+  "main": "render.js",
+  "scripts": {
+    "render": "node render.js",
+    "dev": "vite"
+  },
+  "keywords": [
+    "frontend mentor"
+  ],
+  "author": "ndung",
+  "license": "ISC",
+  "dependencies": {
+    "marked": "^4.0.10",
+    "vite": "^2.9.9"
+  }
+}
