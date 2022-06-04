@@ -12,7 +12,7 @@
       Demo
     </a>
     <span> | </span>
-    <a href="https://github.com/banhmisg9509/devchallenges-sol/button-component/">
+    <a href="https://github.com/banhmisg9509/devchallenges-sol/tree/main/button-component">
       Solution
     </a>
     <span> | </span>
