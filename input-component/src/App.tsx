@@ -6,7 +6,7 @@ const App = () => {
       <h1 className='text-center text-3xl'>Input Component</h1>
       <div className='mb-4'>
         <h2 className='text-2xl mb-2 text-yellow-600'>Default</h2>
-        <Input placeholder='Placeholder' type='password' />
+        <Input placeholder='Placeholder' />
       </div>
       <div className='mb-4'>
         <h2 className='text-2xl mb-2 text-yellow-600'>Error</h2>
@@ -47,7 +47,7 @@ const App = () => {
       </div>
       <div className='mb-4'>
         <h2 className='text-2xl mb-2 text-yellow-600'>Multiline</h2>
-        <Input placeholder='Placeholder' multiline row={4} />
+        <Input placeholder='Placeholder' multiline row={4}  error/>
       </div>
     </div>
   )

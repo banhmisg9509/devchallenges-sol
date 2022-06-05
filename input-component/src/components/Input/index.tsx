@@ -27,8 +27,11 @@ const Input = (props: InputProps | TextAreaProps) => {
     <label
       className={[
         `${props.fullWitdh ? 'block' : 'inline-block'}`,
-        `${props.error && 'text-[#D32F2F] hover:text-[#333333] focus-within:!text-[#D32F2F]'}`,
-        'focus-within:!text-[#2962FF] font-noto-sans',
+        `${
+          props.error
+            ? 'text-[#D32F2F] hover:text-[#333333] focus-within:!text-[#D32F2F]'
+            : 'focus-within:!text-[#2962FF] font-noto-sans'
+        }`,
       ].join(' ')}
     >
       <span>Label</span> <br />
@@ -38,8 +41,12 @@ const Input = (props: InputProps | TextAreaProps) => {
           `${props.fullWitdh ? 'w-full' : 'w-[200px]'}`,
           `${props._size === 'sm' ? 'py-[10px]' : 'py-[18px]'}`,
           `${props.disabled && 'pointer-events-none bg-[#F2F2F2] border-[#E0E0E0]'}`,
-          `${props.error && 'border-[#D32F2F] focus-within:!border-[#D32F2F]'}`,
-          'flex items-center px-[12px] rounded-lg border border-[#828282] hover:border-[#333333] focus-within:!border-[#2962FF]',
+          `${
+            props.error
+              ? 'border-[#D32F2F] focus-within:!border-[#D32F2F]'
+              : 'border-[#828282] focus-within:!border-[#2962FF]'
+          }`,
+          'flex items-center px-[12px] rounded-lg border hover:border-[#333333] ',
         ].join(' ')}
       >
         {props.startIcon && !props.multiline && <div className='pr-3'>{props.startIcon}</div>}
