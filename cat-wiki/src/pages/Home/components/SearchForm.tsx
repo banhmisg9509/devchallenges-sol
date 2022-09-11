@@ -1,4 +1,10 @@
-import { useEffect, useState } from 'react'
+import React, {
+  KeyboardEvent,
+  RefObject,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 import { BsSearch } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 import { useAllBreeds } from '../../../hooks/query/useAllBreeds'
@@ -9,21 +15,52 @@ interface Props {}
 export default function SearchForm({}: Props) {
   const { data } = useAllBreeds()
   const [term, setTerm] = useState('')
+  const [cursor, setCursor] = useState(0)
   const [filteredData, setFilteredData] = useState<Breed[]>([])
+  const listRef = useRef<HTMLUListElement>(null)
+  const listItemRef = useRef<Record<any, RefObject<HTMLLIElement>>>()
 
   useEffect(() => {
     if (data) {
       const regex = new RegExp(term, 'i')
       const filteredData = data.filter((cat) => cat.name.match(regex))
       setFilteredData(filteredData)
+      if (filteredData.length) {
+        const initialValue: Record<any, RefObject<HTMLLIElement>> = {}
+        listItemRef.current = filteredData.reduce((acc, _, index) => {
+          acc[index] = React.createRef<HTMLLIElement>()
+          return acc
+        }, initialValue)
+      }
     }
   }, [term])
 
+  useEffect(() => {
+    if (listItemRef.current && listItemRef.current[cursor]) {
+      listItemRef.current[cursor].current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'start',
+      })
+    }
+  }, [cursor])
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.code === 'ArrowUp' && cursor > 0) {
+      setCursor((value) => value - 1)
+    }
+
+    if (e.code === 'ArrowDown' && cursor < filteredData.length - 1) {
+      setCursor((value) => value + 1)
+    }
+  }
+
   return (
-    <form className='mt-14'>
+    <form className='mt-14' onSubmit={(e) => e.preventDefault()}>
       <div className='relative w-[390px] h-[70px]'>
         <input
           value={term}
+          onKeyDown={handleKeyDown}
           onChange={(e) => setTerm(e.currentTarget.value)}
           type='text'
           placeholder='Enter your breed'
@@ -33,11 +70,17 @@ export default function SearchForm({}: Props) {
           <BsSearch />
         </div>
         {term && filteredData.length > 0 && (
-          <ul className='overflow-y-auto z-10 flex flex-col rounded-[24px] p-3 w-full max-h-[219px] bg-white text-black top-full translate-y-[16px] left-0  absolute'>
+          <ul
+            ref={listRef}
+            className='overflow-y-auto z-10 flex flex-col rounded-[24px] p-3 w-full max-h-[219px] bg-white text-black top-full translate-y-[16px] left-0  absolute'
+          >
             {filteredData.map((cat, index) => (
               <li
+                ref={listItemRef.current?.[index]}
                 key={index}
-                className='w-full px-3 py-4 rounded-xl text-lg hover:bg-[#9797971A]'
+                className={`w-full px-3 py-4 rounded-xl text-lg hover:bg-[#9797971A] ${
+                  index === cursor ? 'bg-[#9797971A]' : ''
+                }`}
               >
                 <Link
                   to={`/cat/${cat.id}`}
