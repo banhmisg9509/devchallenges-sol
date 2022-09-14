@@ -17,6 +17,7 @@ export default function SearchForm({}: Props) {
   const [term, setTerm] = useState('')
   const [cursor, setCursor] = useState(0)
   const [filteredData, setFilteredData] = useState<Breed[]>([])
+  const [showMenu, setShowMenu] = useState(false)
   const listRef = useRef<HTMLUListElement>(null)
   const listItemRef = useRef<Record<any, RefObject<HTMLLIElement>>>()
   const navigate = useNavigate()
@@ -67,6 +68,8 @@ export default function SearchForm({}: Props) {
           value={term}
           onKeyDown={handleKeyDown}
           onChange={(e) => setTerm(e.currentTarget.value)}
+          onFocus={() => setShowMenu(true)}
+          onBlur={() => setShowMenu(false)}
           type='text'
           placeholder='Enter your breed'
           className='text-lg placeholder:text-black w-full h-full text-black px-8 py-7 pr-12 rounded-[60px]'
@@ -74,10 +77,10 @@ export default function SearchForm({}: Props) {
         <div className='cursor-pointer absolute text-xl -translate-y-1/2 right-5 top-1/2 text-black'>
           <BsSearch />
         </div>
-        {term && filteredData.length > 0 && (
+        {showMenu && filteredData.length > 0 && (
           <ul
             ref={listRef}
-            className='overflow-y-auto z-10 flex flex-col rounded-[24px] p-3 w-full max-h-[219px] bg-white text-black top-full translate-y-[16px] left-0  absolute'
+            className='overflow-y-auto z-10 flex flex-col gap-1 rounded-[24px] p-3 w-full max-h-[219px] bg-white text-black top-full translate-y-[16px] left-0  absolute'
           >
             {filteredData.map((cat, index) => (
               <li
@@ -87,17 +90,18 @@ export default function SearchForm({}: Props) {
                   index === cursor ? 'bg-[#9797971A]' : ''
                 }`}
               >
-                <Link
-                  to={`/breed/${cat.id}`}
+                <div
+                  role='a'
+                  onMouseDown={() => navigate(`/breed/${cat.id}`)}
                   className='flex items-center justify-between w-full h-full'
                 >
                   {cat.name}
                   <img
                     src={cat.image?.url}
                     alt={cat.id}
-                    className='rounded-[5px] h-10 w-10 inline-block'
+                    className='rounded-[5px] h-10 w-10 inline-block object-cover'
                   />
-                </Link>
+                </div>
               </li>
             ))}
           </ul>
