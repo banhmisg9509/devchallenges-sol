@@ -27,12 +27,12 @@ export default function Hero({}: Props) {
           <h1 className='text-5xl font-bold'>
             66+ Breeds For you <br /> to discover
           </h1>
-          <a
-            href='#'
+          <Link
+            to='/most-searched-breeds'
             className='font-bold self-end flex items-center gap-2 text-[#29150799]'
           >
             SEE MORE <BsArrowRight color='#7F736A' />
-          </a>
+          </Link>
         </div>
         <div className='mt-[46px] flex flex-wrap justify-between'>
           {data?.map((breed, index) => (
