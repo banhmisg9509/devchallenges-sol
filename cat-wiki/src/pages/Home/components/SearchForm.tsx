@@ -6,7 +6,7 @@ import React, {
   useState,
 } from 'react'
 import { BsSearch } from 'react-icons/bs'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAllBreeds } from '../../../hooks/query/useAllBreeds'
 import { Breed } from '../../../models/Breed'
 
@@ -19,6 +19,7 @@ export default function SearchForm({}: Props) {
   const [filteredData, setFilteredData] = useState<Breed[]>([])
   const listRef = useRef<HTMLUListElement>(null)
   const listItemRef = useRef<Record<any, RefObject<HTMLLIElement>>>()
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (data) {
@@ -53,6 +54,10 @@ export default function SearchForm({}: Props) {
     if (e.code === 'ArrowDown' && cursor < filteredData.length - 1) {
       setCursor((value) => value + 1)
     }
+
+    if (e.code === 'Enter' && cursor > 0 && cursor < filteredData.length - 1) {
+      navigate(`/breed/${filteredData[cursor].id}`)
+    }
   }
 
   return (
@@ -83,10 +88,15 @@ export default function SearchForm({}: Props) {
                 }`}
               >
                 <Link
-                  to={`/cat/${cat.id}`}
-                  className='inline-block w-full h-full'
+                  to={`/breed/${cat.id}`}
+                  className='flex items-center justify-between w-full h-full'
                 >
                   {cat.name}
+                  <img
+                    src={cat.image?.url}
+                    alt={cat.id}
+                    className='rounded-[5px] h-10 w-10 inline-block'
+                  />
                 </Link>
               </li>
             ))}

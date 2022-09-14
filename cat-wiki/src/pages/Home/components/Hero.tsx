@@ -35,15 +35,15 @@ export default function Hero({}: Props) {
           </a>
         </div>
         <div className='mt-[46px] flex flex-wrap justify-between'>
-          {data?.map((cat, index) => (
-            <div key={cat.id}>
+          {data?.map((breed, index) => (
+            <div key={breed.id}>
               <Link
-                to={`/cat/${cat.name}`}
+                to={`/breed/${breed.id}`}
                 className='block w-[220px] h-[220px] relative cursor-pointer overflow-hidden rounded-[24px]'
               >
                 <img
-                  src={cat.image?.url}
-                  alt={cat.name}
+                  src={breed.image?.url}
+                  alt={breed.name}
                   className='hover:scale-110 transition-all duration-300 w-full h-full object-cover object-center z-10 absolute'
                 />
                 {index === 0 && (
@@ -51,7 +51,7 @@ export default function Hero({}: Props) {
                 )}
               </Link>
               <p className='mt-5 capitalize text-lg font-semibold'>
-                {cat.name}
+                {breed.name}
               </p>
             </div>
           ))}
