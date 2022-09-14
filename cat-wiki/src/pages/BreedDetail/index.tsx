@@ -19,12 +19,13 @@ export default function BreedDetailPage() {
     <>
       <section className='flex gap-[115px]'>
         <div className='ml-14'>
-          <div className='h-[370px] w-[370px]'>
+          <div className='h-[370px] w-[370px] relative'>
             <img
               src={image?.url}
               alt={breed?.name}
-              className='w-full h-full object-cover object-center rounded-[24px]'
+              className='w-full h-full object-cover object-center rounded-[24px] z-10 absolute'
             />
+             <div className='absolute h-[80%] w-[20px] bg-[#dec68b] top-[10%] z-0 -left-3 rounded-[14px]'></div>
           </div>
         </div>
         <div className='max-w-[80%]'>

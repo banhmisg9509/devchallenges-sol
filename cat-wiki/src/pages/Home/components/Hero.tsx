@@ -37,19 +37,21 @@ export default function Hero({}: Props) {
         <div className='mt-[46px] flex flex-wrap justify-between'>
           {data?.map((breed, index) => (
             <div key={breed.id}>
-              <Link
-                to={`/breed/${breed.id}`}
-                className='block w-[220px] h-[220px] relative cursor-pointer overflow-hidden rounded-[24px]'
-              >
-                <img
-                  src={breed.image?.url}
-                  alt={breed.name}
-                  className='hover:scale-110 transition-all duration-300 w-full h-full object-cover object-center z-10 absolute'
-                />
+              <div className='relative'>
+                <Link
+                  to={`/breed/${breed.id}`}
+                  className='block w-[220px] h-[220px] relative cursor-pointer overflow-hidden rounded-[24px]'
+                >
+                  <img
+                    src={breed.image?.url}
+                    alt={breed.name}
+                    className='hover:scale-110 transition-all duration-300 w-full h-full object-cover object-center z-10 absolute'
+                  />
+                </Link>
                 {index === 0 && (
-                  <div className='absolute h-[80%] w-[20px] bg-[#dec68b] top-[10%] z-0 -left-4 rounded-[14px]'></div>
+                  <div className='absolute h-[80%] w-[20px] bg-[#dec68b] top-[10%] z-0 -left-3 rounded-[14px]'></div>
                 )}
-              </Link>
+              </div>
               <p className='mt-5 capitalize text-lg font-semibold'>
                 {breed.name}
               </p>
