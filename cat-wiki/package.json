@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://banhmisg9509.github.io/devchallenges-sol/cat-wiki/dist/",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
