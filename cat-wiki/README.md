@@ -1,6 +1,6 @@
 <!-- Please update value in the {}  -->
 
-<h1 align="center">Input Component</h1>
+<h1 align="center">Cat Wiki</h1>
 
 <div align="center">
    Solution for a challenge from  <a href="http://devchallenges.io" target="_blank">Devchallenges.io</a>.
@@ -8,15 +8,15 @@
 
 <div align="center">
   <h3>
-    <a href="https://banhmisg9509.github.io/devchallenges-sol/input-component/dist">
+    <a href="https://banhmisg9509.github.io/devchallenges-sol/cat-wiki/dist">
       Demo
     </a>
     <span> | </span>
-    <a href="https://github.com/banhmisg9509/devchallenges-sol/tree/main/input-component">
+    <a href="https://github.com/banhmisg9509/devchallenges-sol/tree/main/cat-wiki">
       Solution
     </a>
     <span> | </span>
-    <a href="https://devchallenges.io/challenges/TSqutYM4c5WtluM7QzGp">
+    <a href="https://devchallenges.io/challenges/f4NJ53rcfgrP6sBMD2jt">
       Challenge
     </a>
   </h3>
@@ -46,6 +46,7 @@
 
 - [React](https://reactjs.org/)
 - [Tailwind](https://tailwindcss.com/)
+- [React-Icons](https://react-icons.github.io/react-icons/)
 
 ## Features
 
@@ -64,13 +65,13 @@ To clone and run this application, you'll need [Git](https://git-scm.com) and [N
 $ git clone https://github.com/banhmisg9509/devchallenges-sol
 
 # Change to solution directory
-$ cd devchallenges-sol/input-component
+$ cd devchallenges-sol/cat-wiki
 
 # Install dependencies
-$ npm i
+$ yarn
 
 # Run the app
-$ npm run dev
+$ yarn dev
 ```
 
 ## Acknowledgements
