@@ -9,7 +9,7 @@ export function Score({ score }: { score: number | undefined }) {
           .map((_, index) => (
             <span
               key={index}
-              className={`w-[60px] h-[12px] ${
+              className={`flex-shrink-0 w-[30px] h-[6px] xs:w-[45px] xs:h-[10px] lg:w-[40px] xl:w-[60px] xl:h-[12px] ${
                 index < score ? 'bg-[#544439]' : 'bg-[#E0E0E0]'
               } rounded-lg`}
             ></span>

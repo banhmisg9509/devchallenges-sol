@@ -3,11 +3,13 @@ import React, {
   RefObject,
   useEffect,
   useRef,
-  useState,
+  useState
 } from 'react'
 import { BsSearch } from 'react-icons/bs'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { useSearchModalContext } from '../../../context/SearchModalContext'
 import { useAllBreeds } from '../../../hooks/query/useAllBreeds'
+import useMediaQuery from '../../../hooks/useMediaQuery'
 import { Breed } from '../../../models/Breed'
 
 interface Props {}
@@ -21,6 +23,9 @@ export default function SearchForm({}: Props) {
   const listRef = useRef<HTMLUListElement>(null)
   const listItemRef = useRef<Record<any, RefObject<HTMLLIElement>>>()
   const navigate = useNavigate()
+  const { showModal } = useSearchModalContext()
+  const matches = useMediaQuery('(max-width: 768px)')
+  const [placeholderText, setPlaceholderText] = useState('')
 
   useEffect(() => {
     if (data) {
@@ -35,7 +40,7 @@ export default function SearchForm({}: Props) {
         }, initialValue)
       }
     }
-  }, [term])
+  }, [term, data])
 
   useEffect(() => {
     if (listItemRef.current && listItemRef.current[cursor]) {
@@ -46,6 +51,14 @@ export default function SearchForm({}: Props) {
       })
     }
   }, [cursor])
+
+  useEffect(() => {
+    if (matches) {
+      setPlaceholderText('Enter')
+    } else {
+      setPlaceholderText('Enter your breed')
+    }
+  }, [matches])
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.code === 'ArrowUp' && cursor > 0) {
@@ -61,32 +74,47 @@ export default function SearchForm({}: Props) {
     }
   }
 
+  const handleShowMenu = () => {
+    if (placeholderText === "Enter") {
+      showModal()
+      return
+    }
+    setShowMenu(true)
+  }
+
+  const handleHideMenu = () => {
+    setShowMenu(false)
+  }
+
   return (
     <form className='mt-14' onSubmit={(e) => e.preventDefault()}>
-      <div className='relative w-[390px] h-[70px]'>
+      <div className='relative w-[92px] h-[32px] sm:w-[200px] sm:h-[50px] md:w-[250px] lg:w-[390px] lg:h-[70px]'>
         <input
           value={term}
           onKeyDown={handleKeyDown}
           onChange={(e) => setTerm(e.currentTarget.value)}
-          onFocus={() => setShowMenu(true)}
-          onBlur={() => setShowMenu(false)}
+          onFocus={handleShowMenu}
+          onBlur={handleHideMenu}
           type='text'
-          placeholder='Enter your breed'
-          className='text-lg placeholder:text-black w-full h-full text-black px-8 py-7 pr-12 rounded-[60px]'
+          placeholder={placeholderText}
+          className='text-xs sm:text-sm lg:text-lg placeholder:text-black w-full h-full text-black px-3 py-2 lg:px-8 lg:py-7 lg:pr-12 rounded-[60px]'
         />
-        <div className='cursor-pointer absolute text-xl -translate-y-1/2 right-5 top-1/2 text-black'>
+        <div
+          onClick={handleShowMenu}
+          className='cursor-pointer absolute text-[10px] sm:text-lg lg:text-xl -translate-y-1/2 right-3 lg:right-5 top-1/2 text-black'
+        >
           <BsSearch />
         </div>
         {showMenu && filteredData.length > 0 && (
           <ul
             ref={listRef}
-            className='overflow-y-auto z-10 flex flex-col gap-1 rounded-[24px] p-3 w-full max-h-[219px] bg-white text-black top-full translate-y-[16px] left-0  absolute'
+            className='overflow-y-auto z-20 flex flex-col gap-1 rounded-[24px] p-3 w-full max-h-[219px] bg-white text-black top-full translate-y-[16px] left-0  absolute'
           >
             {filteredData.map((cat, index) => (
               <li
                 ref={listItemRef.current?.[index]}
                 key={index}
-                className={`w-full px-3 py-4 rounded-xl text-lg hover:bg-[#9797971A] ${
+                className={`w-full px-3 py-4 rounded-xl text-lg hover:bg-[#9797971A] cursor-pointer ${
                   index === cursor ? 'bg-[#9797971A]' : ''
                 }`}
               >
