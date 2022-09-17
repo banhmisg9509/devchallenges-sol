@@ -8,9 +8,12 @@ function App() {
   return (
     <Layout>
       <Routes>
-        <Route index element={<Home />}></Route>
-        <Route path="/breed/:breedId" element={<BreedDetailPage />}></Route>
-        <Route path="/most-searched-breeds" element={<MostSearchedBreed />}></Route>
+        <Route path='/' element={<Home />} />
+        <Route path='/breed/:breedId' element={<BreedDetailPage />}></Route>
+        <Route
+          path='/most-searched-breeds'
+          element={<MostSearchedBreed />}
+        ></Route>
       </Routes>
     </Layout>
   )
