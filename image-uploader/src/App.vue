@@ -2,7 +2,7 @@
   <main
     @drop="(e) => e.preventDefault()"
     @dragover="(e) => e.preventDefault()"
-    class="w-screen min-h-screen flex justify-center items-center bg-slate-50"
+    class="w-screen min-h-screen flex justify-center items-center bg-gray-50"
   >
     <ImageUploader />
   </main>

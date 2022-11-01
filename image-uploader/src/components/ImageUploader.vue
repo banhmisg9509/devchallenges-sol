@@ -26,7 +26,7 @@
       @dragover="handleDragOver"
       @dragexit="handleDragExit"
       class="border border-[#97BEF4] border-dashed rounded-xl bg-[#F6F8FB] w-full p-9 flex flex-col items-center"
-      :class="[isDragOver ? 'bg-white' : '']"
+      :class="[isDragOver ? 'bg-blue-100' : '']"
     >
       <img :src="placeholderImg" alt="placeholder img" />
       <p class="text-[#BDBDBD] text-xs mt-9">Drag & Drop your image here</p>
